@@ -39,6 +39,7 @@ class DWHDimMccMnc(BaseModel):
     class Config:
         orm_mode = True
 
+
 class DWHDimCountry(BaseModel):
     id = str
     alpha_2 = str
@@ -46,6 +47,30 @@ class DWHDimCountry(BaseModel):
     name = str
     numeric = str
     load_date = str
+
+    class Config:
+        orm_mode = True
+
+
+class DWHFactAlmoabits(BaseModel):
+    id = str
+    cdr_id = str
+    package_id = str
+    date_id = str
+    mmc_mnc_id = str
+    country_id = str
+    imsi_id = str
+    imsi_no = str
+    inventory_id = str
+    iccid = str
+    type = str
+    connect_time = str
+    close_time = str
+    duration = str
+    direction = str
+    called_party = str
+    calling_party = str
+    company_name = str
 
     class Config:
         orm_mode = True

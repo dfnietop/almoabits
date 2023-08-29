@@ -38,8 +38,13 @@ class DimMccmncFacade:
             raise
 
     def run(self):
-        df = self.create_date_table()
-        self.__global_etl.insert(df.to_dict(orient='records'))
+        try:
+            df = self.create_date_table()
+            self.__global_etl.insert(df.to_dict(orient='records'))
+            return df
+        except Exception as e:
+            print('Error procesando dimension mccmcn')
+            raise
 
     def __get_brand(self, mcc_code, mnc_code: str):
         try:

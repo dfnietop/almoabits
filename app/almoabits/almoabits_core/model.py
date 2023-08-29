@@ -42,3 +42,24 @@ class DwhDate(Base):
     month_num = Column(Integer)
     quarter=Column(Integer)
     year=Column(Integer)
+
+class DwhFactAlmoabits(Base):
+    __tablename__ = 'fact_almoabits'
+    id = Column(String, primary_key=True, nullable=False)
+    cdr_id = Column(String)
+    package_id = Column(String)
+    date_id = Column(String)
+    mmc_mnc_id = Column(String)
+    country_id = Column(String)
+    imsi_id = Column(String)
+    imsi_no = Column(String)
+    inventory_id = Column(String),
+    iccid = Column(String)
+    type = Column(String)
+    connect_time = Column(String)
+    close_time = Column(String)
+    duration = Column(String)
+    direction = Column(String)
+    called_party = Column(String)
+    calling_party = Column(String)
+    company_name = Column(String)

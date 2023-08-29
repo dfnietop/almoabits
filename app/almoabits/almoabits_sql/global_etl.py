@@ -26,6 +26,8 @@ class GlobalEtl:
                 mod = model.DwhMccmnc
             elif self.schema == 'dim_country':
                 mod = model.DwhCountry
+            elif self.schema == 'fact_almoabits':
+                mod = model.DwhFactAlmoabits
             else:
                 raise
 
