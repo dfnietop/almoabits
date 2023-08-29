@@ -25,7 +25,7 @@ class DimMccmncFacade:
             dim_mccmnc['brand'] = dim_mccmnc.apply(lambda x: self.__get_brand(x['mcc'], x['mnc']), axis=1)
             dim_mccmnc['operator'] = dim_mccmnc.apply(lambda x: self.__get_operator(x['mcc'], x['mnc']), axis=1)
             dim_mccmnc['load_date'] = datetime.datetime.now()
-
+            dim_mccmnc.drop_duplicates()
             return dim_mccmnc
         except Exception as e:
             print('Error genernado dimension de tiempo')

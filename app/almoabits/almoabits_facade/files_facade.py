@@ -61,6 +61,6 @@ class FilesFacade:
             raise
 
 
-#
-database1 = database.SessionLocal()
-FilesFacade(database1, 'control_cargue').run()
+# #
+# database1 = database.SessionLocal()
+# FilesFacade(database1, 'control_cargue').run()

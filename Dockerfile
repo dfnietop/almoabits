@@ -8,7 +8,11 @@ WORKDIR /app
 
 # set env variables
 ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV DIM_DATA_END_DATE=31/12/2030
+ENV DIM_DATA_START_DATE=01/01/2010
+ENV FILES_PATH=./cdr-files/
+
+
 
 # install dependencies
 COPY requirements.txt .
