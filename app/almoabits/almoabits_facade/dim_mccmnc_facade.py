@@ -9,10 +9,11 @@ import mobile_codes
 
 
 class DimMccmncFacade:
-    def __init__(self, db: database, table: str, data: pd.DataFrame()):
+    def __init__(self, db: database, table: str, data: pd.DataFrame(), df_country: pd.DataFrame()):
         self.database = db
         self.table = table
         self.data = data
+        self.df_country = df_country
         self.__global_etl = GlobalEtl(self.database, self.table)
 
     def create_date_table(self):
@@ -20,13 +21,17 @@ class DimMccmncFacade:
 
             dim_mccmnc = self.data[['COUNTRY_ISO3', 'MCC', 'MNC']]
             dim_mccmnc = dim_mccmnc.rename(columns={'COUNTRY_ISO3': 'country_code', 'MCC': 'mcc', 'MNC': 'mnc'})
-            dim_mccmnc= dim_mccmnc.drop_duplicates()
+            dim_mccmnc = dim_mccmnc.drop_duplicates()
 
             dim_mccmnc = utils.synthetic_uuid(dim_mccmnc, 'id')
             dim_mccmnc['brand'] = dim_mccmnc.apply(lambda x: self.__get_brand(x['mcc'], x['mnc']), axis=1)
             dim_mccmnc['operator'] = dim_mccmnc.apply(lambda x: self.__get_operator(x['mcc'], x['mnc']), axis=1)
             dim_mccmnc['load_date'] = datetime.datetime.now()
-            dim_mccmnc= dim_mccmnc.drop_duplicates()
+            dim_mccmnc = dim_mccmnc.merge(self.df_country[['id', 'alpha_3']], left_on='country_code',
+                                          right_on='alpha_3', how='left')
+            dim_mccmnc = dim_mccmnc.rename(columns={'id_x': 'id', 'id_y': 'id_pais'})
+            dim_mccmnc = dim_mccmnc[['id', 'brand', 'operator', 'load_date', 'id_pais','mcc','mnc']]
+            dim_mccmnc = dim_mccmnc.drop_duplicates()
             return dim_mccmnc
         except Exception as e:
             print('Error genernado dimension de tiempo')

@@ -25,8 +25,8 @@ class DataWareHouseFacade:
         dim_date_facade = DimDateFacade(self.db,'dim_date')
         dim_date_facade.run()
         dim_country_facade = DimCountryFacade(self.db,'dim_country')
-        dim_country_facade.run()
-        dim_mccmnc_facade = DimMccmncFacade(self.db,'dim_mccmnc',df)
+        df_country=dim_country_facade.run()
+        dim_mccmnc_facade = DimMccmncFacade(self.db,'dim_mccmnc',df,df_country)
         dim_mccmnc_facade.run()
 
     def load_dim(self, df_dwh):

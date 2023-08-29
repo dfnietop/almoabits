@@ -25,6 +25,7 @@ class DimCountryFacade:
     def run(self):
         df = self.create_date_table()
         self.__global_etl.insert(df.to_dict(orient='records'))
+        return df
 
     def __get_countries(self):
         try:
