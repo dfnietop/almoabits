@@ -38,3 +38,14 @@ class DWHDimMccMnc(BaseModel):
 
     class Config:
         orm_mode = True
+
+class DWHDimCountry(BaseModel):
+    id = str
+    alpha_2 = str
+    alpha_3 = str
+    name = str
+    numeric = str
+    load_date = str
+
+    class Config:
+        orm_mode = True

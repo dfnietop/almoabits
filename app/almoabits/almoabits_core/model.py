@@ -28,7 +28,6 @@ class DwhCountry(Base):
     alpha_3=Column(String)
     name=Column(String)
     numeric=Column(String)
-    official_name=Column(String)
     load_date = Column(String)
 
 class DwhDate(Base):

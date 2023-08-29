@@ -24,6 +24,8 @@ class GlobalEtl:
                 mod = model.DwhDate
             elif self.schema == 'dim_mccmnc':
                 mod = model.DwhMccmnc
+            elif self.schema == 'dim_country':
+                mod = model.DwhCountry
             else:
                 raise
 

@@ -12,7 +12,8 @@ class almoabitsFacade:
         process = FilesFacade(self.database,'control_cargue')
         df = process.run()
         print('inicia proceso de cargue de preparacion de data wareHouse')
-        process_data = DataWareHouseFacade(self.database)
-        process_data.run(df)
+        if not df.empty:
+            process_data = DataWareHouseFacade(self.database)
+            process_data.run(df)
 
 
