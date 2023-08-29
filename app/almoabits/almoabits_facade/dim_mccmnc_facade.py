@@ -20,12 +20,13 @@ class DimMccmncFacade:
 
             dim_mccmnc = self.data[['COUNTRY_ISO3', 'MCC', 'MNC']]
             dim_mccmnc = dim_mccmnc.rename(columns={'COUNTRY_ISO3': 'country_code', 'MCC': 'mcc', 'MNC': 'mnc'})
+            dim_mccmnc= dim_mccmnc.drop_duplicates()
 
             dim_mccmnc = utils.synthetic_uuid(dim_mccmnc, 'id')
             dim_mccmnc['brand'] = dim_mccmnc.apply(lambda x: self.__get_brand(x['mcc'], x['mnc']), axis=1)
             dim_mccmnc['operator'] = dim_mccmnc.apply(lambda x: self.__get_operator(x['mcc'], x['mnc']), axis=1)
             dim_mccmnc['load_date'] = datetime.datetime.now()
-            dim_mccmnc.drop_duplicates()
+            dim_mccmnc= dim_mccmnc.drop_duplicates()
             return dim_mccmnc
         except Exception as e:
             print('Error genernado dimension de tiempo')
