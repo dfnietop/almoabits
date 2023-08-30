@@ -8,13 +8,14 @@ from app.almoabits.almoabits_utils.utils import synthetic_uuid, csv_dtype
 
 class FilesFacade:
     def __init__(self, db: database = None, schema: str = None):
+        self.__global_etl = None
         print(f'inicio de fachada de archivos')
         self.path = config.settings.PATH
         self.db = db
         self.schema = schema
-        self.__global_etl = GlobalEtl(self.db, self.schema)
 
     def run(self):
+        self.__global_etl = GlobalEtl(self.db, self.schema)
         print('validar los archivos')
         df = self.validate_load()
         print('carga todos los archivos')

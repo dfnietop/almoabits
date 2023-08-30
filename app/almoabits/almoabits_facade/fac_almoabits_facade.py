@@ -21,7 +21,7 @@ class FactAlmoabitsFacade:
         self.dim_country = dim_country
         self.dim_mccmnc = dim_mccmnc
         self.dim_date = dim_date
-        self.__global_etl = GlobalEtl(self.database, self.table)
+        self.__global_etl = None
 
     def create_date_table(self):
         try:
@@ -37,6 +37,7 @@ class FactAlmoabitsFacade:
 
     def run(self):
         try:
+            self.__global_etl = GlobalEtl(self.database, self.table)
             df = self.create_date_table()
             self.__global_etl.insert(df.to_dict(orient='records'))
             return df

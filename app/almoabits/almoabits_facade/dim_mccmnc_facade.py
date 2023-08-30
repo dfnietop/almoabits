@@ -14,7 +14,7 @@ class DimMccmncFacade:
         self.table = table
         self.data = data
         self.df_country = df_country
-        self.__global_etl = GlobalEtl(self.database, self.table)
+        self.__global_etl = None
 
     def create_date_table(self):
         try:
@@ -39,6 +39,7 @@ class DimMccmncFacade:
 
     def run(self):
         try:
+            self.__global_etl = GlobalEtl(self.database, self.table)
             df = self.create_date_table()
             self.__global_etl.insert(df.to_dict(orient='records'))
             return df

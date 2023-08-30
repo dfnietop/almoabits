@@ -9,7 +9,7 @@ class DimCountryFacade:
     def __init__(self, db: database, table: str):
         self.database = db
         self.table = table
-        self.__global_etl = GlobalEtl(self.database, self.table)
+        self.__global_etl = None
 
     def create_date_table(self):
         try:
@@ -23,6 +23,7 @@ class DimCountryFacade:
             raise
 
     def run(self):
+        self.__global_etl = GlobalEtl(self.database, self.table)
         df = self.create_date_table()
         self.__global_etl.insert(df.to_dict(orient='records'))
         return df

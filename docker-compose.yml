@@ -12,6 +12,7 @@ services:
       - 8008:8000
     environment:
       - DATABASE_URL=postgresql://fastapi:fastapi@db:5432/fastapi
+      - ./scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
     depends_on:
       - db
   db:
